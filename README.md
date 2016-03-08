@@ -9,35 +9,35 @@ Just like on PCs, mobile platforms like iOS and Android have devices of various 
 
 * Make sure it runs okay on baseline configuration
 
-确保在最基本的配置下能够正常运行
+  确保在最基本的配置下能够正常运行
 
 * Use more eye-candy on higher performing configurations:
 
-在更高的配置上展现更多的效果
+  在更高的配置上展现更多的效果
 
 	* Resolution
  
-	分辨率
+	  分辨率
 
 	* Post-processing
   
-	后期处理
+	  后期处理
 
 	* MSAA
   
-	抗锯齿
+	  抗锯齿
   
 	* Anisotropy
   
-	各向异性
+	  各向异性
   
 	* Shaders
   
-	着色器
+	  着色器
   
 	* Fx/particles density, on/off
   	
-	特效/粒子密度，开/关
+	  特效/粒子密度，开/关
 
 ### Focus on GPUs
 
