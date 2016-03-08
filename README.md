@@ -13,18 +13,29 @@ Just like on PCs, mobile platforms like iOS and Android have devices of various 
 
 2.Use more eye-candy on higher performing configurations:
 在更高的配置上展现更多的效果
-  * Resolution
-  分辨率
-  * Post-processing
-  后期处理
-  * MSAA
-  抗锯齿
-  * Anisotropy
-  各向异性
-  * Shaders
-  着色器
-  * Fx/particles density, on/off
-  特效/粒子密度，开/关
+  	* Resolution
+ 
+  	分辨率
+
+  	* Post-processing
+  
+	后期处理
+
+	* MSAA
+  
+	抗锯齿
+  
+	* Anisotropy
+  
+	各向异性
+  
+	* Shaders
+  
+	着色器
+  
+	* Fx/particles density, on/off
+  	
+	特效/粒子密度，开/关
 
 ### Focus on GPUs
 
