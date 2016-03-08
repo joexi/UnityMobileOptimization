@@ -7,18 +7,19 @@ Just like on PCs, mobile platforms like iOS and Android have devices of various 
 
 就像PC那样，iOS和安卓这样的移动平台也会有不同（配置）等级的设备。你可以很容易就找到一台拥有10倍于其他手机渲染速度的手机。（优化）可以简单归纳为：
 
-1.Make sure it runs okay on baseline configuration
+* Make sure it runs okay on baseline configuration
 
 确保在最基本的配置下能够正常运行
 
-2.Use more eye-candy on higher performing configurations:
+* Use more eye-candy on higher performing configurations:
+
 在更高的配置上展现更多的效果
-      	
+
 	* Resolution
  
-  	分辨率
+	分辨率
 
-  	* Post-processing
+	* Post-processing
   
 	后期处理
 
