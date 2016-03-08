@@ -13,7 +13,8 @@ Just like on PCs, mobile platforms like iOS and Android have devices of various 
 
 2.Use more eye-candy on higher performing configurations:
 在更高的配置上展现更多的效果
-  	* Resolution
+      	
+	* Resolution
  
   	分辨率
 
