@@ -72,8 +72,12 @@ Unity针对OpenGL ES 2.0进行了优化，他使用了GLSL ES（类似于HLSL）
 
 * Keep the number of materials as low as possible. This makes it easier for Unity to batch stuff.
 
+	尽可能保证材质的数量不会过多。这会简化Unity的批处理操作。
+	
 * Use texture atlases (large images containing a collection of sub-images) instead of a number of individual textures. These are faster to load, have fewer state switches, and are batching friendly.
 
+	
+	
 * Use Renderer.sharedMaterial instead of Renderer.material if using texture atlases and shared materials.
 Forward rendered pixel lights are expensive.
 
