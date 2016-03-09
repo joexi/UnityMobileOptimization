@@ -2,6 +2,7 @@
 Translate of Unity documentation "PlatformSpecific/Mobile Developer Checklist/Optimazation"
 
 ## Optimizations
+## 优化
 
 Just like on PCs, mobile platforms like iOS and Android have devices of various levels of performance. You can easily find a phone that’s 10x more powerful for rendering than some other phone. Quite easy way of scaling:
 
@@ -57,7 +58,7 @@ LOD (Level of Detail) - make objects simpler or eliminate them completely as the
 LOD (Level of Detail) - 当对象在很远处时，使得他们更为简单或者降低他们的复杂度。
 
 #### Good practice
-#### 实践
+#### 好的习惯
 
 Mobile GPUs have huge constraints in how much heat they produce, how much power they use, and how large or noisy they can be. So compared to the desktop parts, mobile GPUs have way less bandwidth, low ALU performance and texturing power. The architectures of the GPUs are also tuned to use as little bandwidth & power as possible.
 
@@ -68,7 +69,7 @@ Unity is optimized for OpenGL ES 2.0, it uses GLSL ES (similar to HLSL) shading 
 Unity针对OpenGL ES 2.0进行了优化，他使用了GLSL ES（类似于HLSL）着色器语言。内置的着色器通常是由HLSL（通常称为Cg）撰写的。GLSL ES是针对移动平台交叉编译而成。你可以直接写GLSL语言如果你愿意，不过这么做使得你局限于OpenGL类的平台（移动设备 + Mac）因为没有能够将GLSL转换为HLSL的工具。当你在HLSL中使用float/half/fixed 类型时，他们最终在GLSL ES中会使用highp/mediump/lowp。
 
 #### Here is the checklist for good practice:
-#### 这里是一些实践时需要检查的列表
+#### 这里是保持良好习惯所需注意的事项
 
 * Keep the number of materials as low as possible. This makes it easier for Unity to batch stuff.
 
