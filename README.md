@@ -77,15 +77,21 @@ Unity针对OpenGL ES 2.0进行了优化，他使用了GLSL ES（类似于HLSL）
 	
 * Use texture atlases (large images containing a collection of sub-images) instead of a number of individual textures. These are faster to load, have fewer state switches, and are batching friendly.
 
-	
+	使用纹理图集（一张大图中包含了许多小图）而不是使用许多单张的小图。这样加载起来会更快,也更利于执行批处理。
 	
 * Use Renderer.sharedMaterial instead of Renderer.material if using texture atlases and shared materials.
 Forward rendered pixel lights are expensive.
 
+	使用纹理图集或者共享的材质时，使用Renderer.sharedMaterial而不是Renderer.material，正向渲染的像素光（对性能的）开销很大。
+	
 	* Use light mapping instead of realtime lights where ever possible.
 	
+	如果可能的话尽量使用光照贴图而不时实时的光照
+	
 	* Adjust pixel light count in quality settings. Essentially only the directional light should be per pixel, everything else - per vertex. Certainly this depends on the game.
-
+	
+	在quality settings中调整像素光的数量，确保只有方向光可能是逐像素，而其他的是逐顶点。当然这也取决于游戏（的需求）。
+	
 * Experiment with Render Mode of Lights in the Quality Settings to get the correct priority.
 
 * Avoid Cutout (alpha test) shaders unless really necessary.
