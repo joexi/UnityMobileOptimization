@@ -94,26 +94,78 @@ Forward rendered pixel lights are expensive.
 	
 * Experiment with Render Mode of Lights in the Quality Settings to get the correct priority.
 
+	对Quality Settings中灯光的渲染模式进行试验来获得正确的优先级。
+	
 * Avoid Cutout (alpha test) shaders unless really necessary.
 
+	避免裁剪类型（alpha检测）的着色器除非他们是必须的。
+	
 * Keep Transparent (alpha blend) screen coverage to a minimum.
-
+	
+	确保屏幕上（包含）透明度（alpha混合）的部分尽可能的小。
+	
 * Try to avoid situations where multiple lights illuminate any given object.
 
+	尽量避免多个光源同时照亮一个物体的情况。
+	
 * Try to reduce the overall number of shader passes (Shadows, pixel lights, reflections).
 
+	尽量降低着色器中pass的数量（阴影，像素光，反射等）。
+	
 * Rendering order is critical. In general case:
-
+	
+	渲染的顺序是十分重要的，一般来说（是这样的）：
+	
 	* fully opaque objects roughly front-to-back.
 
+		完全不透明的物体大致上从前往后渲染
+	
 	* alpha tested objects roughly front-to-back.
-
+	
+		alpha检测的物体大致上从前往后渲染
+	
 	* skybox.
 	
+		天空盒
+		
 	* alpha blended objects (back to front if needed).
-
+	
+		alpha混合的物体（有必要的话从后往前渲染）
+		
 * Post Processing is expensive on mobiles, use with care.
 
+	移动设备上的后期处理开销非常之大，使用的时候需要谨慎。
+	
 * Particles: reduce overdraw, use the simplest possible shaders.
 
+	粒子：减少那些重复绘制，尽可能使用那些最简单的着色器。
+
 * Double buffer for Meshes modified every frame:
+
+	对于每一帧都会被修改的Meshes实行双缓冲:
+
+	```
+	void Update (){
+	  // flip between meshes
+	  bufferMesh = on ? meshA : meshB;
+	  on = !on;
+	  bufferMesh.vertices = vertices; // modification to mesh
+	  meshFilter.sharedMesh = bufferMesh;
+	}
+	```
+	
+### Shader optimizations
+### 着色器优化
+Checking if you are fillrate-bound is easy: does the game run faster if you decrease the display resolution? If yes, you are limited by fillrate.
+
+检查你是不是受限于填充率的方式很简单：游戏是否在你降低分辨率后执行的更快？如果是，那么你（的性能）就受限于填充率
+
+Try reducing shader complexity by the following methods:
+
+* Avoid alpha-testing shaders; instead use alpha-blended versions.
+
+* Use simple, optimized shader code (such as the “Mobile” shaders that ship with Unity).
+
+* Avoid expensive math functions in shader code (pow, exp, log, cos, sin, tan, etc). Consider using pre-calculated lookup textures instead.
+
+* Pick lowest possible number precision format (float, half, fixedin Cg) for best performance.
