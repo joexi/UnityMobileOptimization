@@ -41,6 +41,7 @@ Just like on PCs, mobile platforms like iOS and Android have devices of various 
 	  特效/粒子密度，开/关
 
 ### Focus on GPUs
+### 关于GPU
 
 Graphics performance is bound by fillrate, pixel and geometric complexity (vertex count). All three of these can be reduced if you can find a way to cull more renderers. Occlusion culling could help here as Unity will automatically cull objects outside the viewing frustum.
 
@@ -162,10 +163,43 @@ Checking if you are fillrate-bound is easy: does the game run faster if you decr
 
 Try reducing shader complexity by the following methods:
 
+尝试通过以下的方式来降低着色器的复杂度
+
 * Avoid alpha-testing shaders; instead use alpha-blended versions.
 
+	避免使用alpha-testing着色器，应该使用alpha-blended类型的。
+	
 * Use simple, optimized shader code (such as the “Mobile” shaders that ship with Unity).
 
+	使用简单，优化过的倬测器代码（比如Unity提供的"mobile"着色器）
+	
 * Avoid expensive math functions in shader code (pow, exp, log, cos, sin, tan, etc). Consider using pre-calculated lookup textures instead.
 
+	避免在着色器代码中使用消耗较大的数据运算（pow,exp,log,cos,sin,tan等）考虑使用计算好的纹理。
+	
 * Pick lowest possible number precision format (float, half, fixedin Cg) for best performance.
+	
+	选用尽可能低精度的数值类型（cg中的float，half，fixed）来提升整体的性能表现
+	
+
+## Focus on CPUs
+## 关于CPU
+
+It is often the case that games are limited by the GPU on pixel processing. So they end up having unused CPU power, especially on multicore mobile CPUs. So it is often sensible to pull some work off the GPU and put it onto the CPU instead (Unity does all of these): mesh skinning, batching of small objects, particle geometry updates.
+
+很多游戏都是由于GPU像素处理的问题受到了限制。所以他们开始使用那些没有使用的CPU算力，尤其是在那些多核心的CPU上。所以把一些GPU上的任务迁移到CPU上进行运算是十分明智的（Unity做了这些）网格蒙皮，小物体的批处理，粒子几何体更新。
+
+These should be used with care, not blindly. If you are not bound by draw calls, then batching is actually worse for performance, as it makes culling less efficient and makes more objects affected by lights!
+
+应该小心谨慎而不是盲目的使用。如果你没有受制于drawcall的次数，那么批处理反而对性能有损耗，这会使得裁剪更抵消并且使更多物体收到光照的影响。
+
+### Good practice
+### 好的习惯
+
+* FindObjectsOfType (and Unity getter properties in general) are very slow, so use them sensibly.
+
+FindObjectsOfType（以及其他unity中泛型方式获取属性）是非常慢的，所以要小心掉使用他们。
+
+* Set the Static property on non-moving objects to allow internal optimizations like static batching.
+
+* Spend lots of CPU cycles to do occlusion culling and better sorting (to take advantage of Early Z-cull).
