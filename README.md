@@ -202,4 +202,92 @@ FindObjectsOfType（以及其他unity中泛型方式获取属性）是非常慢�
 
 * Set the Static property on non-moving objects to allow internal optimizations like static batching.
 
+将那些不会移动的物体设置为“静态”属性使得他们可以像静态对象那样进行批处理优化
+
 * Spend lots of CPU cycles to do occlusion culling and better sorting (to take advantage of Early Z-cull).
+
+花费大量的CPU周期进行遮挡剔除的计算以及更好的渲染排序（利用Early Z架构的裁剪）
+
+### Physics
+### 物理引擎
+
+Physics can be CPU heavy. It can be profiled via the Editor profiler. If Physics appears to take too much time on CPU:
+
+物理引擎会大量消耗CPU资源。这可以通过编辑器下的Profiler工具进行监测。如果物理引擎出现了在CPU层面消耗大量时间，那么：
+
+* Tweak Time.fixedDeltaTime (in Project settings -> Time) to be as high as you can get away with. If your game is slow moving, you probably need less fixed updates than games with fast action. Fast paced games will need more frequent calculations, and thus fixedDeltaTime will need to be lower or a collision may fail.
+
+（在in Project settings -> Time中）将Time.fixedDeltaTime在能接受情况下设置的高些。如果你的游戏运行的很慢，那么你可能需要降低fixed updates的频率了。快节奏的游戏通常需要更实时的计算，这样的话fixedDeltaTime将会更低否则的话碰撞检测就可能会产生错误。
+
+
+* Physics.solverIterationCount (Physics Manager).
+
+解算器迭代次数
+
+* Use as little Cloth objects as possible.
+
+尽可能少使用一些“衣物”对象（注:这些对象会有更多的实时物理计算）
+
+* Use Rigidbodies only where necessary.
+
+只在需要的时候才使用刚体（Rigidbody）
+
+* Use primitive colliders in preference mesh colliders.
+
+使用基础的碰撞盒（注:例如矩形或者椭圆体）而不是基于mesh的碰撞盒
+
+* Never ever move a static collider (ie a collider without a Rigidbody) as it causes a big performance hit. It shows up in Profiler as "Static Collider.Move’ but actual processing is in Physics.Simulate. If necessary, add a RigidBody and set isKinematic to true.
+
+绝对不要去移动一个静态的碰撞盒（例如那些没有刚体附件的碰撞器）这会导致很大的性能开销。这会在Profiler中以“Static Collider.Move”的显现，实际处理会是在“Physics.Simulate”中。如果必须这么做的话，就在上面挂在一个刚体附件并且设置isKinematic属性为true吧。
+
+* On Windows you can use NVidia’s AgPerfMon profiling tool set to get more details if needed.
+
+在Windows平台上你可以使用NVidia的AgPerfMon监测工具来获取更多的详细信息。
+
+## Android
+### GPU
+
+These are the popular mobile architectures. This is both different hardware vendors than in PC/console space, and very different GPU architectures than the “usual” GPUs.
+
+这些都是非常常见的移动设备架构。不仅仅硬件的供应商和PC/主机不同，而且GPU架构和传统相比更是差别甚远。
+
+* ImgTec PowerVR SGX - Tile based, deferred: render everything in small tiles (as 16x16), shade only visible pixels
+
+TBDR架构，将所有的物体在小型的Tile（16x16）中进行渲染，仅对可视范围内的像素进行阴影的处理
+
+* NVIDIA Tegra - Classic: Render everything
+
+Classic经典架构，渲染所有物体
+
+* Qualcomm Adreno - Tiled: Render everything in tile, engineered in large tiles (as 256k). Adreno 3xx can switch to traditional.
+
+Tiled架构，在Tile中渲染所有物体，设计成大型的tile（256k）。Adreno 3xx可以切换成传统形态
+
+* ARM Mali Tiled: Render everything in tile, engineered in small tiles (as 16x16)
+
+Tiled架构，在Tile中渲染所有物体，设计成小型的tile（16x16）
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
